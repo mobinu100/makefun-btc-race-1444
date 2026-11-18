@@ -14,7 +14,7 @@
 //     on strong signals. All five kit baselines lose on this window
 //     (buy-and-hold -$31.63, momentum -$23.87, ema-cross -$148.17,
 //     rsi-bollinger -$39.92, adx-momentum -$75.57); this bot's local grade
-//     is +$7.15 with 8 trades and 0.55% max drawdown.
+//     is +$8.25 with 8 trades and 0.52% max drawdown.
 //
 // Two legs, one position at a time, half of cash each:
 //   Leg A (momentum): 60-minute return above +55 bps -> buy; exit on a
@@ -38,7 +38,10 @@ const MAX_SLIPPAGE_BPS = 100;
 const MOM_LOOKBACK = 60;
 const MOM_THRESHOLD_BPS = 55;
 const MOM_TRAIL_BPS = 90;
-const MOM_MAX_HOLD = 180;
+// Hold at most 150 bars: the 60m-momentum edge persists about 60-120m
+// forward, and 150 (entry lag included) scored best on the dev window
+// (+$8.25 vs +$7.15 at 180, +$3.92 at 120) at the lowest drawdown.
+const MOM_MAX_HOLD = 150;
 // Leg B: deep dip below the 30-bar SMA.
 const SMA_SPAN = 30;
 const DIP_BPS = 120;
